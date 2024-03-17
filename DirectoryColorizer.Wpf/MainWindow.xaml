@@ -1,0 +1,32 @@
+﻿<Window x:Class="DirectoryColorizer.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        xmlns:wpf="clr-namespace:DirectoryColorizer.Wpf"
+        ui:WindowHelper.UseModernWindowStyle="True"
+        Title="Colorizer" Height="450" Width="800" d:DataContext="{d:DesignInstance wpf:MainWindowVM}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Image Source="{Binding Icon}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path, UpdateSourceTrigger=PropertyChanged}"
+                 MouseLeftButtonDown="FolderPathClick" Focusable="False"/>
+        <Slider Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Minimum="0" Maximum="360"
+                Value="{Binding Shift, UpdateSourceTrigger=PropertyChanged}" />
+        <UniformGrid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Rows="1" Columns="3">
+            <Button Content="Ustaw" Command="{Binding SetNewCmd}"/>
+            <Button Content="Resetuj" Command="{Binding ResetCmd}"/>
+            <Button Content="Przywróć domyślne" Command="{Binding SetDefaultCmd}"/>
+        </UniformGrid>
+    </Grid>
+</Window>
